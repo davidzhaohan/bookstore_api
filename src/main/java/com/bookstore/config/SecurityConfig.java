@@ -26,7 +26,8 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/", "/index.html", "/static/**", "/favicon.ico", "/h2-console/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/books/**").permitAll()
                 .anyRequest().authenticated()
             )
             .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
